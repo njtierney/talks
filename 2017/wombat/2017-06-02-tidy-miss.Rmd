@@ -32,6 +32,7 @@ library(leaflet)
 library(ggplot2)
 # gps_melb_olympic_park <- ggmap::geocode("Melbourne Olympic Park")
 gps_melb_olympic_park <- data.frame(long = 144.9813, lat = -37.82463)
+
 # data prep ----
 
 tidy_melb_data <- readr::read_csv("data/tidy_melb_data.csv")
@@ -40,13 +41,6 @@ messy_melb_data <- tidy_melb_data %>%
   mutate(air_temp = if_else(gust_kmh > 30,
                             true = NA_real_,
                             false = air_temp))
-         # rain_trace = if_else(air_temp < 9,
-         #                      true = NA_real_,
-         #                      false = rain_trace))
-         # gust_kmh = if_else(air_temp < 12  & gust_kmh > 30,
-         #                    true = NA_integer_,
-         #                    false = gust_kmh))
-         # 
 
 ```
 
@@ -156,7 +150,6 @@ class: inverse, center, middle
 
 ---
 background-image: url(https://i.redd.it/wku7d6zhk3ry.jpg)
-<!-- background-size: cover -->
 background-size: contain 
 background-position: 50% 50%
 class: center, bottom
@@ -171,7 +164,7 @@ class: center, bottom
 .large[
 1. How to START looking at missing data? 
 2. How to explore missingness mechanisms? 
-3. What to do when there are many variables to explore?
+3. Can we model missingness?
 ]
 
 .center[
@@ -261,6 +254,14 @@ Developed at the rOpenSci unconf
 
 - Lots of Squinting
 
+```{r out.width="60%"}
+
+# knitr::include_graphics("http://www1.pictures.zimbio.com/mp/YqtJ2X-miOsl.jpg")
+knitr::include_graphics("figs/narnia-eastwood.jpg")
+
+```
+
+
 ???
 
 However, these summary methods still require you to parse a lot of text, and read through summaries. These are very useful, but they fall over when you find, for example, that all of your data might be encoded as characters and factors, instead of dates, integers, and numerics.
@@ -298,19 +299,17 @@ In particular, `vis_miss` provides a summary of whether the data is all present,
 class: middle, center
 # Cleaning...
 
-```{r}
 
+---
+class: center
+## `vis_dat(melb_data)`
+
+```{r}
+melb_data <- messy_melb_data
 ```
 
 
----
-.center[
-## `vis_dat`
-]
-
 ```{r}
-
-melb_data <- messy_melb_data
 
 vis_dat(melb_data)
 
@@ -318,11 +317,23 @@ vis_dat(melb_data)
 
 ---
 class: center
-### `vis_miss(melb_weather, cluster = TRUE)`
+### `vis_miss(melb_data)`
+
+```{r vis-miss-cluster-vanilla}
+
+vis_miss(melb_data)
+
+```
+
+---
+class: center
+### `vis_miss(messy_melb_data, cluster = TRUE)`
 
 ```{r vis-miss-cluster}
+
 vis_miss(messy_melb_data,
          cluster = TRUE)
+
 ```
 
 ???
@@ -330,11 +341,20 @@ You can even perform some rudimentary hierarchical clustering in the visualisati
 
 ---
 
-## Exploring missingness relationships
+# Exploring missingness relationships
 
-- The process is that we can identify key variables that are missing
 
-- But for further exploration, we need to explore the relationship between air temperature and, gust (Km/hr), and rainfall.
+.large[
+
+We can identify key variables that are missing
+
+For further exploration, we need to explore the relationship amongst:
+
+]
+
+- Air temperature,
+- Gust (Km/hr), and 
+- Rainfall.
 
 ???
 
@@ -363,15 +383,43 @@ The problem with this is that ggplot does not handle missings be default, and re
 
 ## Exploring missingness relationships
 
+How do you visualise something that is not there?
 
-One approach, adopted in MANET, and Swayne and Buja, is to shift missing values below the minimum value, so that they can be plotted on the same axis.
+One approach, (MANET, ggobi) is to shift missing values below the minimum value, so that they can be plotted on the same axis.
+
+.pull-left[
+```{r}
+
+# narnia:::which_na(melb_data)
+
+melb_data %>%
+  select(air_temp) %>%
+  slice(95:105) 
+
+```
+]
+
+.pull-right[
+```{r}
+
+melb_data %>%
+  select(air_temp) %>%
+  slice(95:105) %>%
+  mutate(air_temp_shift = shadow_shift(air_temp))
+
+```
+]
+
+---
+
+# Exploring missingness relationships
 
 However, doing this for each variable would typically involve some code like this:
 
 --
 
 ```{r echo = TRUE, eval = FALSE}
-data %>%  
+melb_data %>%  
 mutate(miss_cat = miss_cat(., "rain_trace", "air_temp")) %>%   
 ggplot(data = .,
        aes(x = shadow_shift(rain_trace),
@@ -406,10 +454,57 @@ class: inverse middle, center
 
 ### simpler and more fun!
 
+---
+.center[
+# What does it do?
+]
+
+--
+.pull-left[
+
+## Visualisations
+
+- `geom_missing_point()`
+- `gg_missing_var()`
+
+]
+
+--
+
+.pull-right[
+
+## Numerical Summaries
+
+- `n_miss()`
+- `n_complete()`
+- `miss_case_pct()`
+- `miss_case_table()`
+- `miss_case_summary()`
+- `miss_var_pct()`
+- `miss_var_summary()`
+- `miss_var_table()`
+
+]
+
 
 ---
-class: center, middle
+.center[
 ## `geom_missing_point()`
+]
+
+```{r echo = TRUE, out.width = "70%"}
+
+ggplot(messy_melb_data, 
+       aes(x = rain_trace, 
+           y = air_temp)) + 
+  geom_point()
+
+```
+
+---
+.center[
+## `geom_missing_point()`
+]
 
 ```{r echo = TRUE}
 
@@ -420,9 +515,23 @@ ggplot(messy_melb_data,
 
 ```
 
----
 
+
+---
+.center[
 ## `geom_missing_point()`
+]
+
+```{r echo = TRUE}
+
+ggplot(messy_melb_data, 
+       aes(x = gust_kmh, 
+           y = air_temp)) + 
+  geom_missing_point()
+
+```
+
+???
 
 Instead, we have create a ggplot2 geom, `geom_missing_point()`.
 
@@ -431,7 +540,7 @@ This `geom` allows for missing values to be displayed, and also works with the r
 ---
 ## Facets!
 
-```{r ggmissing-facet, echo = TRUE}
+```{r ggmissing-facet, echo = TRUE, out.width = "70%"}
 
 ggplot(messy_melb_data, 
        aes(x = rain_trace, 
@@ -441,11 +550,24 @@ ggplot(messy_melb_data,
 
 ```
 
+---
+## Themes!
+
+```{r ggmissing-theme, echo = TRUE, out.width = "70%"}
+
+ggplot(messy_melb_data, 
+       aes(x = rain_trace, 
+           y = air_temp)) + 
+  geom_missing_point() + 
+  facet_wrap(~lubridate::month(messy_melb_data$ymd_hm)) +
+  theme_dark()
+
+```
 
 ---
-## Other helpers
+## Other features
 
-### simple summaries
+### Numerical summaries
 
 ```{r echo = TRUE}
 
@@ -509,11 +631,11 @@ miss_var_table(melb_data)
 ---
 ## The shadowlands 
 
-`as_shadow`
+`as_shadow(melb_data)`
 
 ```{r}
 
-as_shadow(melb_data)
+as_shadow(melb_data[95:115,])
 
 ```
 
@@ -532,15 +654,16 @@ glimpse(melb_data_shadow)
 
 ## The shadowlands?
 
-- Allows you to record / set the existing location of missing values.
-
-
-```{r shadow-plot, out.width = "50%"}
+```{r shadow-plot, echo = TRUE, out.width = "60%"}
 
 ggplot(melb_data_shadow,
        aes(x = gust_kmh,
            colour = air_temp_NA)) + 
   geom_density()
+
+```
+
+```{r shadow-plot-2, echo = TRUE, out.width = "60%"}
 
 ggplot(melb_data_shadow,
        aes(x = rain_trace,
@@ -550,6 +673,8 @@ ggplot(melb_data_shadow,
 ```
 
 ???
+
+- Provides a consistent way to set the existing location of missing values.
 
 - This has additional great benefits when combined with imputation
 
@@ -594,7 +719,7 @@ library(simputation)
 
 ---
 
-# What can Narnia do?
+# Shadows make things clearer!
 
 ```{r echo = TRUE, out.width = "70%"}
   simputation::impute_lm(air_temp ~ rain_trace + gust_kmh,
@@ -608,43 +733,59 @@ library(simputation)
 
 
 ---
+class: inverse, middle, center
+# Back to our questions
 
-## Back to our questions
-
-.large[
-1. How to START looking at missing data? 
+---
+# 1. How to START looking at missing data? 
 
 `visdat::vis_dat()`
 
+---
+# 1. How to START looking at missing data? 
+
 `visdat::vis_miss()`
 
-2. How to explore missingness mechanisms? 
+---
+# 2. How to explore missingness mechanisms? 
 
 `narnia::geom_missing_point()`
 
-3. What to do when there are many variables to explore?
+---
+# 2. How to explore missingness mechanisms? 
 
-]
+`narnia::bind_shadow()`
+
+---
+# 3. Can we model missingness?
 
 
-## What if there's many variables?
+You can model missing data using methods from Tierney et el. (2015).
 
-Modelling missing data using decision trees:
+Predict the proportion of missingness - use `add_prop_miss()` from `narnia`.
+
+```{r add-prop-miss, echo = TRUE}
+
+melb_data %>%
+  add_prop_miss() %>%
+  slice(99:104)
+
+```
 
 
-```{r}
+---
+# 3. Can we model missingness?
+
+
+```{r rpart-miss, echo = TRUE}
 
 library(rpart)
-library(narnia)
 library(rpart.plot)
 
 messy_melb_data %>%
   add_prop_miss() %>%
-  rpart(prop_miss ~ ., 
-        data = .) %>%
-  prp(type = 4,
-      extra = 101,
-      prefix = "Prop. Miss = ")
+  rpart(prop_miss ~ ., data = .) %>%
+  prp(type = 4, extra = 101, prefix = "Prop. Miss = ")
 
 # library(visdat)
 # vis_miss(messy_melb_data)
@@ -669,10 +810,11 @@ Why do we care about these mechanisms or these patterns?
 
 ## Missing Data: Future development
 
-- Big Data tools (sparklyr, etc)
-- Expand ggplot `geom_missing_*`:
-- plots for time series data
-- appropriate techniques for multiple imputation
+.large[
+- Big Data tools (sparklyr, sparklingwater)
+- Expand ggplot `geom_missing_*` family
+- Develop methods for handling and visualising multiple imputation
+]
 
 
 ```{r}
@@ -682,16 +824,38 @@ Why do we care about these mechanisms or these patterns?
 
 ```
 
+---
 # Thank you
 
 - Di Cook, Miles McBain, Rob Hyndman
-- rOpenSci
 
-# Further reading / References
 
-- [visdat]()
-- [narnia]()
-- [bomrang]()
-- [Swayne and Buja]()
+
+```{r out.width = "50%", fig.align = "center"}
+knitr::include_graphics("http://i.imgur.com/TTnpSYS.png")
+```
+
+
+---
+# References
+
+.pull-left[
+## R packages
+- visdat - 
+- narnia - 
+- bomrang - 
+
+## Papers
 - MANET
-- [ggobi
+- ggobi
+- Tierney et al
+]
+
+.pull-right[
+## My details
+
+- twitter.com/nj_tierney
+- github.com/njtierney
+- njtierney.com
+
+]

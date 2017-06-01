@@ -69,8 +69,8 @@ class: center, middle
 
 ## Weather data from Melbourne Olympic Park
 
-<div id="htmlwidget-310ad3c287bcec238a42" style="width:100%;height:80%;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-310ad3c287bcec238a42">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-37.82463,144.9813,null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,null,null]},{"method":"addProviderTiles","args":["Hydda.RoadsAndLabels",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]}],"limits":{"lat":[-37.82463,-37.82463],"lng":[144.9813,144.9813]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ced37e29288c0a8f2e53" style="width:100%;height:80%;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ced37e29288c0a8f2e53">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-37.82463,144.9813,null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,null,null]},{"method":"addProviderTiles","args":["Hydda.RoadsAndLabels",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]}],"limits":{"lat":[-37.82463,-37.82463],"lng":[144.9813,144.9813]}},"evals":[],"jsHooks":[]}</script>
 
 
 ---
@@ -108,7 +108,6 @@ class: inverse, center, middle
 
 ---
 background-image: url(https://i.redd.it/wku7d6zhk3ry.jpg)
-&lt;!-- background-size: cover --&gt;
 background-size: contain 
 background-position: 50% 50%
 class: center, bottom
@@ -123,7 +122,7 @@ class: center, bottom
 .large[
 1. How to START looking at missing data? 
 2. How to explore missingness mechanisms? 
-3. What to do when there are many variables to explore?
+3. Can we model missingness?
 ]
 
 .center[
@@ -280,6 +279,9 @@ Developed at the rOpenSci unconf
 
 - Lots of Squinting
 
+&lt;img src="figs/narnia-eastwood.jpg" width="60%" style="display: block; margin: auto;" /&gt;
+
+
 ???
 
 However, these summary methods still require you to parse a lot of text, and read through summaries. These are very useful, but they fall over when you find, for example, that all of your data might be encoded as characters and factors, instead of dates, integers, and numerics.
@@ -319,18 +321,24 @@ class: middle, center
 # Cleaning...
 
 
-
-
 ---
-.center[
-## `vis_dat`
-]
+class: center
+## `vis_dat(melb_data)`
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: center
-### `vis_miss(melb_weather, cluster = TRUE)`
+### `vis_miss(melb_data)`
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/vis-miss-cluster-vanilla-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+class: center
+### `vis_miss(messy_melb_data, cluster = TRUE)`
 
 &lt;img src="2017-06-02-tidy-miss_files/figure-html/vis-miss-cluster-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
@@ -339,11 +347,20 @@ You can even perform some rudimentary hierarchical clustering in the visualisati
 
 ---
 
-## Exploring missingness relationships
+# Exploring missingness relationships
 
-- The process is that we can identify key variables that are missing
 
-- But for further exploration, we need to explore the relationship between air temperature and, gust (Km/hr), and rainfall.
+.large[
+
+We can identify key variables that are missing
+
+For further exploration, we need to explore the relationship amongst:
+
+]
+
+- Air temperature,
+- Gust (Km/hr), and 
+- Rainfall.
 
 ???
 
@@ -366,7 +383,7 @@ ggplot(messy_melb_data,
 ## Warning: Removed 12 rows containing missing values (geom_point).
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ???
 
@@ -378,8 +395,53 @@ The problem with this is that ggplot does not handle missings be default, and re
 
 ## Exploring missingness relationships
 
+How do you visualise something that is not there?
 
-One approach, adopted in MANET, and Swayne and Buja, is to shift missing values below the minimum value, so that they can be plotted on the same axis.
+One approach, (MANET, ggobi) is to shift missing values below the minimum value, so that they can be plotted on the same axis.
+
+.pull-left[
+
+```
+## # A tibble: 11 x 1
+##    air_temp
+##       &lt;dbl&gt;
+##  1      9.3
+##  2      9.7
+##  3      9.0
+##  4      8.7
+##  5      8.9
+##  6      9.1
+##  7      9.1
+##  8       NA
+##  9       NA
+## 10       NA
+## 11     11.9
+```
+]
+
+.pull-right[
+
+```
+## # A tibble: 11 x 2
+##    air_temp air_temp_shift
+##       &lt;dbl&gt;          &lt;dbl&gt;
+##  1      9.3       9.300000
+##  2      9.7       9.700000
+##  3      9.0       9.000000
+##  4      8.7       8.700000
+##  5      8.9       8.900000
+##  6      9.1       9.100000
+##  7      9.1       9.100000
+##  8       NA       8.328230
+##  9       NA       8.431627
+## 10       NA       8.388872
+## 11     11.9      11.900000
+```
+]
+
+---
+
+# Exploring missingness relationships
 
 However, doing this for each variable would typically involve some code like this:
 
@@ -387,7 +449,7 @@ However, doing this for each variable would typically involve some code like thi
 
 
 ```r
-data %&gt;%  
+melb_data %&gt;%  
 mutate(miss_cat = miss_cat(., "rain_trace", "air_temp")) %&gt;%   
 ggplot(data = .,
        aes(x = shadow_shift(rain_trace),
@@ -422,10 +484,62 @@ class: inverse middle, center
 
 ### simpler and more fun!
 
+---
+.center[
+# What does it do?
+]
+
+--
+.pull-left[
+
+## Visualisations
+
+- `geom_missing_point()`
+- `gg_missing_var()`
+
+]
+
+--
+
+.pull-right[
+
+## Numerical Summaries
+
+- `n_miss()`
+- `n_complete()`
+- `miss_case_pct()`
+- `miss_case_table()`
+- `miss_case_summary()`
+- `miss_var_pct()`
+- `miss_var_summary()`
+- `miss_var_table()`
+
+]
+
 
 ---
-class: center, middle
+.center[
 ## `geom_missing_point()`
+]
+
+
+```r
+ggplot(messy_melb_data, 
+       aes(x = rain_trace, 
+           y = air_temp)) + 
+  geom_point()
+```
+
+```
+## Warning: Removed 12 rows containing missing values (geom_point).
+```
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+.center[
+## `geom_missing_point()`
+]
 
 
 ```r
@@ -435,11 +549,26 @@ ggplot(messy_melb_data,
   geom_missing_point()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
 
 ---
-
+.center[
 ## `geom_missing_point()`
+]
+
+
+```r
+ggplot(messy_melb_data, 
+       aes(x = gust_kmh, 
+           y = air_temp)) + 
+  geom_missing_point()
+```
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+???
 
 Instead, we have create a ggplot2 geom, `geom_missing_point()`.
 
@@ -457,13 +586,27 @@ ggplot(messy_melb_data,
   facet_wrap(~lubridate::month(messy_melb_data$ymd_hm))
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/ggmissing-facet-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/ggmissing-facet-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
-## Other helpers
+## Themes!
 
-### simple summaries
+
+```r
+ggplot(messy_melb_data, 
+       aes(x = rain_trace, 
+           y = air_temp)) + 
+  geom_missing_point() + 
+  facet_wrap(~lubridate::month(messy_melb_data$ymd_hm)) +
+  theme_dark()
+```
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/ggmissing-theme-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+## Other features
+
+### Numerical summaries
 
 
 ```r
@@ -591,11 +734,11 @@ miss_var_table(melb_data)
 ---
 ## The shadowlands 
 
-`as_shadow`
+`as_shadow(melb_data)`
 
 
 ```
-## # A tibble: 155 x 5
+## # A tibble: 21 x 5
 ##    ymd_hm_NA time_NA gust_kmh_NA air_temp_NA rain_trace_NA
 ##       &lt;fctr&gt;  &lt;fctr&gt;      &lt;fctr&gt;      &lt;fctr&gt;        &lt;fctr&gt;
 ##  1       !NA     !NA         !NA         !NA           !NA
@@ -605,10 +748,10 @@ miss_var_table(melb_data)
 ##  5       !NA     !NA         !NA         !NA           !NA
 ##  6       !NA     !NA         !NA         !NA           !NA
 ##  7       !NA     !NA         !NA         !NA           !NA
-##  8       !NA     !NA         !NA         !NA           !NA
-##  9       !NA     !NA         !NA         !NA           !NA
-## 10       !NA     !NA         !NA         !NA           !NA
-## # ... with 145 more rows
+##  8       !NA     !NA         !NA          NA           !NA
+##  9       !NA     !NA         !NA          NA           !NA
+## 10       !NA     !NA         !NA          NA           !NA
+## # ... with 11 more rows
 ```
 
 ---
@@ -641,12 +784,29 @@ glimpse(melb_data_shadow)
 
 ## The shadowlands?
 
-- Allows you to record / set the existing location of missing values.
+
+```r
+ggplot(melb_data_shadow,
+       aes(x = gust_kmh,
+           colour = air_temp_NA)) + 
+  geom_density()
+```
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/shadow-plot-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/shadow-plot-1.png" width="50%" style="display: block; margin: auto;" /&gt;&lt;img src="2017-06-02-tidy-miss_files/figure-html/shadow-plot-2.png" width="50%" style="display: block; margin: auto;" /&gt;
+```r
+ggplot(melb_data_shadow,
+       aes(x = rain_trace,
+           colour = air_temp_NA)) + 
+  geom_density()
+```
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/shadow-plot-2-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ???
+
+- Provides a consistent way to set the existing location of missing values.
 
 - This has additional great benefits when combined with imputation
 
@@ -666,7 +826,7 @@ library(simputation)
   geom_point()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-20-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: inverse, middle, center
@@ -689,11 +849,11 @@ library(simputation)
   geom_point()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-21-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
-# What can Narnia do?
+# Shadows make things clearer!
 
 
 ```r
@@ -705,35 +865,82 @@ library(simputation)
   geom_point()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-27-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 ---
+class: inverse, middle, center
+# Back to our questions
 
-## Back to our questions
-
-.large[
-1. How to START looking at missing data? 
+---
+# 1. How to START looking at missing data? 
 
 `visdat::vis_dat()`
 
+---
+# 1. How to START looking at missing data? 
+
 `visdat::vis_miss()`
 
-2. How to explore missingness mechanisms? 
+---
+# 2. How to explore missingness mechanisms? 
 
 `narnia::geom_missing_point()`
 
-3. What to do when there are many variables to explore?
+---
+# 2. How to explore missingness mechanisms? 
 
-]
+`narnia::bind_shadow()`
+
+---
+# 3. Can we model missingness?
 
 
-## What if there's many variables?
+You can model missing data using methods from Tierney et el. (2015).
 
-Modelling missing data using decision trees:
+Predict the proportion of missingness - use `add_prop_miss()` from `narnia`.
 
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-23-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+```r
+melb_data %&gt;%
+  add_prop_miss() %&gt;%
+  slice(99:104)
+```
+
+```
+## # A tibble: 6 x 6
+##                ymd_hm     time gust_kmh air_temp rain_trace prop_miss
+##                &lt;dttm&gt;   &lt;time&gt;    &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+## 1 2017-05-30 18:11:00 18:11:00       17      8.9        1.2       0.0
+## 2 2017-05-30 18:00:00 18:00:00       15      9.1        0.0       0.0
+## 3 2017-05-30 17:30:00 17:30:00       13      9.1        0.0       0.0
+## 4 2017-05-30 17:00:00 17:00:00       32       NA        0.0       0.2
+## 5 2017-05-30 16:30:00 16:30:00       33       NA        0.0       0.2
+## 6 2017-05-30 16:00:00 16:00:00       32       NA        0.0       0.2
+```
+
+
+---
+# 3. Can we model missingness?
+
+
+
+```r
+library(rpart)
+library(rpart.plot)
+
+messy_melb_data %&gt;%
+  add_prop_miss() %&gt;%
+  rpart(prop_miss ~ ., data = .) %&gt;%
+  prp(type = 4, extra = 101, prefix = "Prop. Miss = ")
+```
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/rpart-miss-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+```r
+# library(visdat)
+# vis_miss(messy_melb_data)
+```
 
 ---
 
@@ -754,27 +961,48 @@ Why do we care about these mechanisms or these patterns?
 
 ## Missing Data: Future development
 
-- Big Data tools (sparklyr, etc)
-- Expand ggplot `geom_missing_*`:
-- plots for time series data
-- appropriate techniques for multiple imputation
+.large[
+- Big Data tools (sparklyr, sparklingwater)
+- Expand ggplot `geom_missing_*` family
+- Develop methods for handling and visualising multiple imputation
+]
 
 
 
 
+---
 # Thank you
 
 - Di Cook, Miles McBain, Rob Hyndman
-- rOpenSci
 
-# Further reading / References
 
-- [visdat]()
-- [narnia]()
-- [bomrang]()
-- [Swayne and Buja]()
+
+&lt;img src="http://i.imgur.com/TTnpSYS.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# References
+
+.pull-left[
+## R packages
+- visdat - 
+- narnia - 
+- bomrang - 
+
+## Papers
 - MANET
-- [ggobi
+- ggobi
+- Tierney et al
+]
+
+.pull-right[
+## My details
+
+- twitter.com/nj_tierney
+- github.com/njtierney
+- njtierney.com
+
+]
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
