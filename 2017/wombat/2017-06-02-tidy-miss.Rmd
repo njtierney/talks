@@ -157,6 +157,14 @@ class: center, bottom
 
 ---
 
+```{r}
+knitr::include_graphics("figs/giphy-tumblr.gif")
+```
+
+
+
+---
+
 .center[
 # The Questions
 ]
@@ -466,6 +474,7 @@ class: inverse middle, center
 
 - `geom_missing_point()`
 - `gg_missing_var()`
+- `bind_shadow()` patterns
 
 ]
 
@@ -565,68 +574,10 @@ ggplot(messy_melb_data,
 ```
 
 ---
-## Other features
+class: inverse, middle, center
+# The shadowlands
 
-### Numerical summaries
-
-```{r echo = TRUE}
-
-n_miss(melb_data)
-n_complete(melb_data)
-miss_case_pct(melb_data)
-miss_var_pct(melb_data)
-
-```
-
----
-
-## Summaries
-
-**for each case**
-
-```{r echo = TRUE}
-
-miss_case_summary(melb_data)
-
-```
-
----
-
-## Summaries
-
-**for each variable**
-
-```{r echo = TRUE}
-
-miss_var_summary(melb_data)
-
-```
-
----
-
-## Tabulations
-
-**for each case**
-
-```{r echo = TRUE}
-
-miss_case_table(melb_data)
-
-```
-
-
----
-
-## Tabulations
-
-**for each variable**
-
-```{r echo = TRUE}
-
-miss_var_table(melb_data)
-
-```
-
+### Representing Missing values  
 
 ---
 ## The shadowlands 
@@ -652,21 +603,26 @@ glimpse(melb_data_shadow)
 
 ---
 
-## The shadowlands?
+## The shadowlands
 
 ```{r shadow-plot, echo = TRUE, out.width = "60%"}
 
+
 ggplot(melb_data_shadow,
-       aes(x = gust_kmh,
+       aes(x = rain_trace,
            colour = air_temp_NA)) + 
   geom_density()
 
 ```
 
+---
+
+## The shadowlands
+
 ```{r shadow-plot-2, echo = TRUE, out.width = "60%"}
 
 ggplot(melb_data_shadow,
-       aes(x = rain_trace,
+       aes(x = gust_kmh,
            colour = air_temp_NA)) + 
   geom_density()
 
@@ -732,6 +688,69 @@ library(simputation)
 ```
 
 
+
+---
+## Narnia Numerical Summaries
+
+```{r echo = TRUE}
+
+n_miss(melb_data)
+n_complete(melb_data)
+miss_case_pct(melb_data)
+miss_var_pct(melb_data)
+
+```
+
+---
+
+## Summaries
+
+**for each case**
+
+```{r echo = TRUE}
+
+miss_case_summary(melb_data)
+
+```
+
+---
+
+## Summaries
+
+**for each variable**
+
+```{r echo = TRUE}
+
+miss_var_summary(melb_data)
+
+```
+
+---
+
+## Tabulations
+
+**for each case**
+
+```{r echo = TRUE}
+
+miss_case_table(melb_data)
+
+```
+
+
+---
+
+## Tabulations
+
+**for each variable**
+
+```{r echo = TRUE}
+
+miss_var_table(melb_data)
+
+```
+
+
 ---
 class: inverse, middle, center
 # Back to our questions
@@ -739,26 +758,46 @@ class: inverse, middle, center
 ---
 # 1. How to START looking at missing data? 
 
-`visdat::vis_dat()`
+
+```{r echo = TRUE}
+vis_dat(melb_data)
+```
+
 
 ---
 # 1. How to START looking at missing data? 
 
-`visdat::vis_miss()`
+```{r echo = TRUE}
+vis_miss(melb_data)
+```
+
 
 ---
 # 2. How to explore missingness mechanisms? 
 
-`narnia::geom_missing_point()`
+
+
+```{r echo = TRUE, out.width = "60%"}
+ggplot(messy_melb_data, 
+       aes(x = rain_trace, 
+           y = air_temp)) + 
+  geom_missing_point()
+```
+
 
 ---
 # 2. How to explore missingness mechanisms? 
 
-`narnia::bind_shadow()`
+```{r echo = TRUE, out.width = "60%"}
+ggplot(melb_data_shadow,
+       aes(x = gust_kmh,
+           colour = air_temp_NA)) + 
+  geom_density()
+```
+
 
 ---
 # 3. Can we model missingness?
-
 
 You can model missing data using methods from Tierney et el. (2015).
 
@@ -795,22 +834,25 @@ messy_melb_data %>%
 
 # So what?
 
-Using these tools and identify this missingness
+.large[
+- These tools help us identify missingness, while maintaining a tidy workflow
 
 Why do we care about these mechanisms or these patterns?
 
-
-- It helps you understand 
-	- equipment failures
-		- future work and maintenance
-	- possible solution?
-	  - impute based upon nearby stations
+- It helps us understand potential mechanisms, such as:
+	- Equipment failures
+		- Future work and maintenance
+	- Possible solutions?
+	  - Impute based upon nearby station records
+	  
+]
 
 ---
 
 ## Missing Data: Future development
 
 .large[
+- Continue making `narnia` play well with `dplyr` and `tidyr`
 - Big Data tools (sparklyr, sparklingwater)
 - Expand ggplot `geom_missing_*` family
 - Develop methods for handling and visualising multiple imputation
@@ -827,35 +869,38 @@ Why do we care about these mechanisms or these patterns?
 ---
 # Thank you
 
-- Di Cook, Miles McBain, Rob Hyndman
+.large[
+- Di Cook
 
+- Rob Hyndman
 
+- Miles McBain
+]
 
-```{r out.width = "50%", fig.align = "center"}
+```{r out.width = "50%"}
 knitr::include_graphics("http://i.imgur.com/TTnpSYS.png")
 ```
-
 
 ---
 # References
 
 .pull-left[
 ## R packages
-- visdat - 
-- narnia - 
-- bomrang - 
+- github.com/njtierney/visdat
+- github.com/njtierney/narnia
+- github.com/ToowoombaTrio/BOMRang
 
-## Papers
-- MANET
-- ggobi
-- Tierney et al
-]
-
-.pull-right[
 ## My details
 
 - twitter.com/nj_tierney
 - github.com/njtierney
 - njtierney.com
+]
 
+.pull-right[
+
+## Software / Papers
+- MANET: http://www.rosuda.org/MANET/
+- ggobi: http://www.ggobi.org/
+- Tierney NJ et al, BMJ Open 2015, doi: 10.1136/bmjopen-2014-007450
 ]

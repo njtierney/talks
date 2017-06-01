@@ -69,8 +69,8 @@ class: center, middle
 
 ## Weather data from Melbourne Olympic Park
 
-<div id="htmlwidget-ced37e29288c0a8f2e53" style="width:100%;height:80%;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ced37e29288c0a8f2e53">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-37.82463,144.9813,null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,null,null]},{"method":"addProviderTiles","args":["Hydda.RoadsAndLabels",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]}],"limits":{"lat":[-37.82463,-37.82463],"lng":[144.9813,144.9813]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6770120f969344b8ab22" style="width:100%;height:80%;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6770120f969344b8ab22">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-37.82463,144.9813,null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,null,null]},{"method":"addProviderTiles","args":["Hydda.RoadsAndLabels",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]}],"limits":{"lat":[-37.82463,-37.82463],"lng":[144.9813,144.9813]}},"evals":[],"jsHooks":[]}</script>
 
 
 ---
@@ -111,6 +111,12 @@ background-image: url(https://i.redd.it/wku7d6zhk3ry.jpg)
 background-size: contain 
 background-position: 50% 50%
 class: center, bottom
+
+
+---
+
+&lt;img src="figs/giphy-tumblr.gif" width="80%" style="display: block; margin: auto;" /&gt;
+
 
 
 ---
@@ -328,7 +334,7 @@ class: center
 
 
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: center
@@ -383,7 +389,7 @@ ggplot(messy_melb_data,
 ## Warning: Removed 12 rows containing missing values (geom_point).
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ???
 
@@ -496,6 +502,7 @@ class: inverse middle, center
 
 - `geom_missing_point()`
 - `gg_missing_var()`
+- `bind_shadow()` patterns
 
 ]
 
@@ -534,7 +541,7 @@ ggplot(messy_melb_data,
 ## Warning: Removed 12 rows containing missing values (geom_point).
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 .center[
@@ -549,7 +556,7 @@ ggplot(messy_melb_data,
   geom_missing_point()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -566,7 +573,7 @@ ggplot(messy_melb_data,
   geom_missing_point()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ???
 
@@ -604,9 +611,155 @@ ggplot(messy_melb_data,
 &lt;img src="2017-06-02-tidy-miss_files/figure-html/ggmissing-theme-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
-## Other features
+class: inverse, middle, center
+# The shadowlands
 
-### Numerical summaries
+### Representing Missing values  
+
+---
+## The shadowlands 
+
+`as_shadow(melb_data)`
+
+
+```
+## # A tibble: 21 x 5
+##    ymd_hm_NA time_NA gust_kmh_NA air_temp_NA rain_trace_NA
+##       &lt;fctr&gt;  &lt;fctr&gt;      &lt;fctr&gt;      &lt;fctr&gt;        &lt;fctr&gt;
+##  1       !NA     !NA         !NA         !NA           !NA
+##  2       !NA     !NA         !NA         !NA           !NA
+##  3       !NA     !NA         !NA         !NA           !NA
+##  4       !NA     !NA         !NA         !NA           !NA
+##  5       !NA     !NA         !NA         !NA           !NA
+##  6       !NA     !NA         !NA         !NA           !NA
+##  7       !NA     !NA         !NA         !NA           !NA
+##  8       !NA     !NA         !NA          NA           !NA
+##  9       !NA     !NA         !NA          NA           !NA
+## 10       !NA     !NA         !NA          NA           !NA
+## # ... with 11 more rows
+```
+
+---
+
+## The shadowlands
+
+
+```r
+melb_data_shadow &lt;- bind_shadow(melb_data)
+
+glimpse(melb_data_shadow)
+```
+
+```
+## Observations: 155
+## Variables: 10
+## $ ymd_hm        &lt;dttm&gt; 2017-06-01 14:30:00, 2017-06-01 14:00:00, 2017-...
+## $ time          &lt;time&gt; 14:30:00, 14:00:00, 13:30:00, 13:00:00, 12:30:0...
+## $ gust_kmh      &lt;int&gt; 19, 19, 13, 15, 13, 15, 20, 0, 7, 13, 11, 9, 13,...
+## $ air_temp      &lt;dbl&gt; 13.1, 13.1, 13.3, 13.4, 13.2, 12.5, 12.2, 11.8, ...
+## $ rain_trace    &lt;dbl&gt; 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0...
+## $ ymd_hm_NA     &lt;fctr&gt; !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !N...
+## $ time_NA       &lt;fctr&gt; !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !N...
+## $ gust_kmh_NA   &lt;fctr&gt; !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !N...
+## $ air_temp_NA   &lt;fctr&gt; !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !N...
+## $ rain_trace_NA &lt;fctr&gt; !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !N...
+```
+
+---
+
+## The shadowlands
+
+
+```r
+ggplot(melb_data_shadow,
+       aes(x = rain_trace,
+           colour = air_temp_NA)) + 
+  geom_density()
+```
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/shadow-plot-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## The shadowlands
+
+
+```r
+ggplot(melb_data_shadow,
+       aes(x = gust_kmh,
+           colour = air_temp_NA)) + 
+  geom_density()
+```
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/shadow-plot-2-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+???
+
+- Provides a consistent way to set the existing location of missing values.
+
+- This has additional great benefits when combined with imputation
+
+- Also allows for additional visualisations
+
+---
+
+# What about imputation?
+
+
+```r
+library(simputation)
+  simputation::impute_lm(air_temp ~ rain_trace + gust_kmh, 
+                         dat = melb_data) %&gt;%
+  ggplot(aes(x = ymd_hm,
+             y = air_temp)) + 
+  geom_point()
+```
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-21-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse, middle, center
+
+## Yeah, what about it? 
+
+---
+
+## What is imputed, stays imputed
+
+**it's invisible!!**
+
+
+```r
+library(simputation)
+  simputation::impute_lm(air_temp ~ rain_trace + gust_kmh, 
+                         dat = melb_data) %&gt;%
+  ggplot(aes(x = ymd_hm,
+             y = air_temp)) + 
+  geom_point()
+```
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Shadows make things clearer!
+
+
+```r
+  simputation::impute_lm(air_temp ~ rain_trace + gust_kmh,
+                         dat = melb_data_shadow) %&gt;%
+  ggplot(aes(x = ymd_hm,
+             y = air_temp,
+             colour = air_temp_NA)) + 
+  geom_point()
+```
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Narnia Numerical Summaries
 
 
 ```r
@@ -732,57 +885,50 @@ miss_var_table(melb_data)
 
 
 ---
-## The shadowlands 
-
-`as_shadow(melb_data)`
-
-
-```
-## # A tibble: 21 x 5
-##    ymd_hm_NA time_NA gust_kmh_NA air_temp_NA rain_trace_NA
-##       &lt;fctr&gt;  &lt;fctr&gt;      &lt;fctr&gt;      &lt;fctr&gt;        &lt;fctr&gt;
-##  1       !NA     !NA         !NA         !NA           !NA
-##  2       !NA     !NA         !NA         !NA           !NA
-##  3       !NA     !NA         !NA         !NA           !NA
-##  4       !NA     !NA         !NA         !NA           !NA
-##  5       !NA     !NA         !NA         !NA           !NA
-##  6       !NA     !NA         !NA         !NA           !NA
-##  7       !NA     !NA         !NA         !NA           !NA
-##  8       !NA     !NA         !NA          NA           !NA
-##  9       !NA     !NA         !NA          NA           !NA
-## 10       !NA     !NA         !NA          NA           !NA
-## # ... with 11 more rows
-```
+class: inverse, middle, center
+# Back to our questions
 
 ---
+# 1. How to START looking at missing data? 
 
-## The shadowlands
 
 
 ```r
-melb_data_shadow &lt;- bind_shadow(melb_data)
-
-glimpse(melb_data_shadow)
+vis_dat(melb_data)
 ```
 
-```
-## Observations: 155
-## Variables: 10
-## $ ymd_hm        &lt;dttm&gt; 2017-06-01 14:30:00, 2017-06-01 14:00:00, 2017-...
-## $ time          &lt;time&gt; 14:30:00, 14:00:00, 13:30:00, 13:00:00, 12:30:0...
-## $ gust_kmh      &lt;int&gt; 19, 19, 13, 15, 13, 15, 20, 0, 7, 13, 11, 9, 13,...
-## $ air_temp      &lt;dbl&gt; 13.1, 13.1, 13.3, 13.4, 13.2, 12.5, 12.2, 11.8, ...
-## $ rain_trace    &lt;dbl&gt; 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0...
-## $ ymd_hm_NA     &lt;fctr&gt; !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !N...
-## $ time_NA       &lt;fctr&gt; !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !N...
-## $ gust_kmh_NA   &lt;fctr&gt; !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !N...
-## $ air_temp_NA   &lt;fctr&gt; !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !N...
-## $ rain_trace_NA &lt;fctr&gt; !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !NA, !N...
-```
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-29-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
 
 ---
+# 1. How to START looking at missing data? 
 
-## The shadowlands?
+
+```r
+vis_miss(melb_data)
+```
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-30-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# 2. How to explore missingness mechanisms? 
+
+
+
+
+```r
+ggplot(messy_melb_data, 
+       aes(x = rain_trace, 
+           y = air_temp)) + 
+  geom_missing_point()
+```
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-31-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# 2. How to explore missingness mechanisms? 
 
 
 ```r
@@ -792,109 +938,11 @@ ggplot(melb_data_shadow,
   geom_density()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/shadow-plot-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-32-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
-
-```r
-ggplot(melb_data_shadow,
-       aes(x = rain_trace,
-           colour = air_temp_NA)) + 
-  geom_density()
-```
-
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/shadow-plot-2-1.png" width="60%" style="display: block; margin: auto;" /&gt;
-
-???
-
-- Provides a consistent way to set the existing location of missing values.
-
-- This has additional great benefits when combined with imputation
-
-- Also allows for additional visualisations
-
----
-
-# What about imputation?
-
-
-```r
-library(simputation)
-  simputation::impute_lm(air_temp ~ rain_trace + gust_kmh, 
-                         dat = melb_data) %&gt;%
-  ggplot(aes(x = ymd_hm,
-             y = air_temp)) + 
-  geom_point()
-```
-
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
----
-class: inverse, middle, center
-
-## Yeah, what about it? 
-
----
-
-## What is imputed, stays imputed
-
-**it's invisible!!**
-
-
-```r
-library(simputation)
-  simputation::impute_lm(air_temp ~ rain_trace + gust_kmh, 
-                         dat = melb_data) %&gt;%
-  ggplot(aes(x = ymd_hm,
-             y = air_temp)) + 
-  geom_point()
-```
-
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
----
-
-# Shadows make things clearer!
-
-
-```r
-  simputation::impute_lm(air_temp ~ rain_trace + gust_kmh,
-                         dat = melb_data_shadow) %&gt;%
-  ggplot(aes(x = ymd_hm,
-             y = air_temp,
-             colour = air_temp_NA)) + 
-  geom_point()
-```
-
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-27-1.png" width="70%" style="display: block; margin: auto;" /&gt;
-
-
----
-class: inverse, middle, center
-# Back to our questions
-
----
-# 1. How to START looking at missing data? 
-
-`visdat::vis_dat()`
-
----
-# 1. How to START looking at missing data? 
-
-`visdat::vis_miss()`
-
----
-# 2. How to explore missingness mechanisms? 
-
-`narnia::geom_missing_point()`
-
----
-# 2. How to explore missingness mechanisms? 
-
-`narnia::bind_shadow()`
 
 ---
 # 3. Can we model missingness?
-
 
 You can model missing data using methods from Tierney et el. (2015).
 
@@ -946,22 +994,25 @@ messy_melb_data %&gt;%
 
 # So what?
 
-Using these tools and identify this missingness
+.large[
+- These tools help us identify missingness, while maintaining a tidy workflow
 
 Why do we care about these mechanisms or these patterns?
 
-
-- It helps you understand 
-	- equipment failures
-		- future work and maintenance
-	- possible solution?
-	  - impute based upon nearby stations
+- It helps us understand potential mechanisms, such as:
+	- Equipment failures
+		- Future work and maintenance
+	- Possible solutions?
+	  - Impute based upon nearby station records
+	  
+]
 
 ---
 
 ## Missing Data: Future development
 
 .large[
+- Continue making `narnia` play well with `dplyr` and `tidyr`
 - Big Data tools (sparklyr, sparklingwater)
 - Expand ggplot `geom_missing_*` family
 - Develop methods for handling and visualising multiple imputation
@@ -973,35 +1024,38 @@ Why do we care about these mechanisms or these patterns?
 ---
 # Thank you
 
-- Di Cook, Miles McBain, Rob Hyndman
+.large[
+- Di Cook
 
+- Rob Hyndman
 
+- Miles McBain
+]
 
 &lt;img src="http://i.imgur.com/TTnpSYS.png" width="50%" style="display: block; margin: auto;" /&gt;
-
 
 ---
 # References
 
 .pull-left[
 ## R packages
-- visdat - 
-- narnia - 
-- bomrang - 
+- github.com/njtierney/visdat
+- github.com/njtierney/narnia
+- github.com/ToowoombaTrio/BOMRang
 
-## Papers
-- MANET
-- ggobi
-- Tierney et al
-]
-
-.pull-right[
 ## My details
 
 - twitter.com/nj_tierney
 - github.com/njtierney
 - njtierney.com
+]
 
+.pull-right[
+
+## Software / Papers
+- MANET: http://www.rosuda.org/MANET/
+- ggobi: http://www.ggobi.org/
+- Tierney NJ et al, BMJ Open 2015, doi: 10.1136/bmjopen-2014-007450
 ]
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
