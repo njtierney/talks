@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1496277678514.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "9A6F32F1",
+    "lastKnownWriteTime" : 1496336353,
+    "last_content_update" : 1496336353982,
+    "path" : "~/talks/2017/wombat/2017-06-02-tidy-miss.Rmd",
+    "project_path" : "2017-06-02-tidy-miss.Rmd",
+    "properties" : {
+        "cursorPosition" : "669,23",
+        "last_setup_crc32" : "250A83724faf79c",
+        "scrollLine" : "665",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
