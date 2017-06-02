@@ -195,9 +195,6 @@ I will then move to discuss the problems with current methods for exploring and 
 ---
 class: inverse, middle, center
 # Back to the beginning
-```{r}
-tidy_melb_data
-```
 
 ```{r}
 
@@ -209,6 +206,9 @@ melb_data <- messy_melb_data %>%
   
 ```
 
+```{r}
+melb_data
+```
 
 ---
 # Data Exploration: First Steps
@@ -275,6 +275,20 @@ knitr::include_graphics("figs/narnia-eastwood.jpg")
 However, these summary methods still require you to parse a lot of text, and read through summaries. These are very useful, but they fall over when you find, for example, that all of your data might be encoded as characters and factors, instead of dates, integers, and numerics.
 
 ---
+# Data Exploration: Pre-exploratory visualisation?
+
+```{r}
+
+ggplot(melb_data,
+       aes(x = ymd_hm,
+           y = air_temp)) + 
+  geom_point()
+
+```
+
+
+
+---
 class: inverse, middle, center
 # `visdat`
 
@@ -333,7 +347,7 @@ vis_miss(melb_data)
 
 ```
 
-
+---
 # Exploring missingness relationships
 
 

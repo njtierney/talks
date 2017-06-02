@@ -69,8 +69,8 @@ class: center, middle
 
 ## Weather data from Melbourne Olympic Park
 
-<div id="htmlwidget-6770120f969344b8ab22" style="width:100%;height:80%;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6770120f969344b8ab22">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-37.82463,144.9813,null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,null,null]},{"method":"addProviderTiles","args":["Hydda.RoadsAndLabels",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]}],"limits":{"lat":[-37.82463,-37.82463],"lng":[144.9813,144.9813]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ec1c9ec6386bef060ab4" style="width:100%;height:80%;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ec1c9ec6386bef060ab4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-37.82463,144.9813,null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,null,null]},{"method":"addProviderTiles","args":["Hydda.RoadsAndLabels",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]}],"limits":{"lat":[-37.82463,-37.82463],"lng":[144.9813,144.9813]}},"evals":[],"jsHooks":[]}</script>
 
 
 ---
@@ -152,10 +152,13 @@ I will then move to discuss the problems with current methods for exploring and 
 class: inverse, middle, center
 # Back to the beginning
 
+
+
+
 ```
 ## # A tibble: 155 x 5
 ##                 ymd_hm     time gust_kmh air_temp rain_trace
-##                 &lt;dttm&gt;   &lt;time&gt;    &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+##                  &lt;chr&gt;    &lt;chr&gt;   &lt;fctr&gt;    &lt;chr&gt;      &lt;chr&gt;
 ##  1 2017-06-01 14:30:00 14:30:00       19     13.1          0
 ##  2 2017-06-01 14:00:00 14:00:00       19     13.1          0
 ##  3 2017-06-01 13:30:00 13:30:00       13     13.3          0
@@ -168,9 +171,6 @@ class: inverse, middle, center
 ## 10 2017-06-01 10:00:00 10:00:00       13     10.9          0
 ## # ... with 145 more rows
 ```
-
-
-
 
 ---
 # Data Exploration: First Steps
@@ -293,6 +293,13 @@ Developed at the rOpenSci unconf
 However, these summary methods still require you to parse a lot of text, and read through summaries. These are very useful, but they fall over when you find, for example, that all of your data might be encoded as characters and factors, instead of dates, integers, and numerics.
 
 ---
+# Data Exploration: Pre-exploratory visualisation?
+
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
 class: inverse, middle, center
 # `visdat`
 
@@ -334,7 +341,7 @@ class: center
 
 
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: center
@@ -342,7 +349,7 @@ class: center
 
 &lt;img src="2017-06-02-tidy-miss_files/figure-html/vis-miss-cluster-vanilla-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
-
+---
 # Exploring missingness relationships
 
 
@@ -379,7 +386,7 @@ ggplot(messy_melb_data,
 ## Warning: Removed 12 rows containing missing values (geom_point).
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ???
 
@@ -529,7 +536,7 @@ ggplot(messy_melb_data,
 ## Warning: Removed 12 rows containing missing values (geom_point).
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 .center[
@@ -544,7 +551,7 @@ ggplot(messy_melb_data,
   geom_missing_point()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -561,7 +568,7 @@ ggplot(messy_melb_data,
   geom_missing_point()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ???
 
@@ -703,7 +710,7 @@ library(simputation)
   geom_point()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-21-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: inverse, middle, center
@@ -726,7 +733,7 @@ library(simputation)
   geom_point()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-23-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -742,7 +749,7 @@ library(simputation)
   geom_point()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -885,7 +892,7 @@ class: inverse, middle, center
 vis_dat(melb_data)
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-29-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-30-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -896,7 +903,7 @@ vis_dat(melb_data)
 vis_miss(melb_data)
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-30-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-31-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -912,7 +919,7 @@ ggplot(messy_melb_data,
   geom_missing_point()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-31-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-32-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -926,7 +933,7 @@ ggplot(melb_data_shadow,
   geom_density()
 ```
 
-&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-32-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="2017-06-02-tidy-miss_files/figure-html/unnamed-chunk-33-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
