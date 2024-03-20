@@ -1,0 +1,3 @@
+[submodule "funfun"]
+	path = funfun
+	url = https://github.com/njtierney/funfun
